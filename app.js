@@ -4,19 +4,21 @@ const Tesseract = require('tesseract.js');
 
 mongoose.connect("mongodb://user:password123@ds059947.mlab.com:59947/azureapp", { useNewUrlParser: true });
 
-const imgSchema = mongoose.Schema({
-    link : String,
-    text : String
+const userSchema = mongoose.Schema({
+    vkontakteId: String,
+    available: Number,
+    link: String,
+    text: String
 })
 
-const Img = mongoose.model('Img', imgSchema);
+const User = mongoose.model('User', userSchema)
 
 Tesseract.recognize(
     process.env.LINK,
     process.env.LANG,
     { logger: m => console.log(m) }
         ).then(async ({ data: { text } }) => {
-    await Img.findOneAndUpdate({_id:process.env.ID}, {text : text} , function(err, doc){
+    await User.findOneAndUpdate({vkontakteId: process.env.ID}, {text : text} , function(err, doc){
         mongoose.disconnect();
     
         if(err) return console.log(err);
