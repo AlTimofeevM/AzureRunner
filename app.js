@@ -9,7 +9,7 @@ const imgSchema = mongoose.Schema({
     text : String
 })
 
-const Img = mongoose.model("User", userScheme);
+const Img = mongoose.model('Img', imgSchema);
 
 Tesseract.recognize(
     process.env.LINK,
