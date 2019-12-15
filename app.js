@@ -1,19 +1,25 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Tesseract = require( 'tesseract.js');
+const Tesseract = require('tesseract.js');
 
 mongoose.connect("mongodb://user:password123@ds059947.mlab.com:59947/azureapp", { useNewUrlParser: true });
-console.log(process.env.var1)
-console.log(process.env.var2)
 
-const userScheme = new Schema({
-    vkontakteId: String,
-    imgs : [String]
+const imgSchema = mongoose.Schema({
+    link : String,
+    text : String
 })
-const User = mongoose.model("User", userScheme);
-User.create({vkontakteId : process.env.var1}, function(err, doc){
-    mongoose.disconnect();
 
-    if(err) return console.log(err);
-});
+const Img = mongoose.model("User", userScheme);
+
+Tesseract.recognize(
+    process.env.LINK,
+    process.env.LANG,
+    { logger: m => console.log(m) }
+        ).then(({ data: { text } }) => {
+    Img.findOneAndUpdate({_id:process.env.ID}, {text : text} , function(err, doc){
+        mongoose.disconnect();
+    
+        if(err) return console.log(err);
+        })
+    })
 
