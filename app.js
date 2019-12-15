@@ -23,4 +23,7 @@ Tesseract.recognize(
     
         if(err) return console.log(err);
         })
-    })
+    }).catch((error) => {
+    assert.isNotOk(error,'Promise error');
+    done();
+    });
