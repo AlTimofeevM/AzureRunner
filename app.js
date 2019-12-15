@@ -15,11 +15,10 @@ Tesseract.recognize(
     process.env.LINK,
     process.env.LANG,
     { logger: m => console.log(m) }
-        ).then(({ data: { text } }) => {
-    Img.findOneAndUpdate({_id:process.env.ID}, {text : text} , function(err, doc){
+        ).then(async ({ data: { text } }) => {
+    await Img.findOneAndUpdate({_id:process.env.ID}, {text : text} , function(err, doc){
         mongoose.disconnect();
     
         if(err) return console.log(err);
         })
     })
-
