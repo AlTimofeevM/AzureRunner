@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Tesseract = require('tesseract.js');
 
-mongoose.connect("mongodb://user:password123@ds059947.mlab.com:59947/azureapp", { useNewUrlParser: true });
+mongoose.connect("mongodb://user:password123@ds059947.mlab.com:59947/azureapp", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const userSchema = mongoose.Schema({
     vkontakteId: String,
@@ -24,6 +24,5 @@ Tesseract.recognize(
         if(err) return console.log(err);
         })
     }).catch((error) => {
-    assert.isNotOk(error,'Promise error');
-    done();
+        console.log(error)
     });
