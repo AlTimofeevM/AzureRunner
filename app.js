@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
 const User = mongoose.model('User', userSchema)
 
 
-let score = sentiment(process.env.TEXT, 'ru').score
+let score = sentiment(process.env.TEXT, 'en').score
 let emotion = "Нейтрально эмоциональное сообщение"
 if(score < 0){
     emotion = "Негативное эмоциональное сообщение"

@@ -18,6 +18,6 @@
   "homepage": "https://github.com/AlTimofeevM/AzureRunner#readme",
   "dependencies": {
     "mongoose": "^5.8.1",
-    "multilang-sentiment": "^1.2.0",
+    "multilang-sentiment": "^1.2.0"
   }
 }
